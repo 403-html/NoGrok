@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "NoGrok",
   "description": "Remove Grokipedia results from major search engines for a cleaner, source-first search experience.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "homepage_url": "https://github.com/403-html/NoGrok",
   "permissions": ["storage"],
   "icons": {

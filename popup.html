@@ -11,12 +11,24 @@
       }
       body {
         margin: 12px;
-      min-width: 220px;
-      color: #0f172a;
-    }
-    h1 {
-      font-size: 16px;
-        margin: 0 0 10px;
+        min-width: 220px;
+        color: #0f172a;
+      }
+      .header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .header img {
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        font-size: 16px;
+        margin: 0;
       }
       fieldset {
         border: 1px solid #cbd5e1;
@@ -57,7 +69,10 @@
     </style>
   </head>
   <body>
-    <h1>NoGrok</h1>
+    <div class="header">
+      <img src="assets/NoGrok-128.png" alt="NoGrok icon" />
+      <h1>NoGrok</h1>
+    </div>
     <fieldset>
       <legend>Handling</legend>
       <label>

@@ -4,6 +4,12 @@
   "description": "Remove Grokipedia results from major search engines for a cleaner, source-first search experience.",
   "version": "1.0.0",
   "permissions": ["storage"],
+  "icons": {
+    "16": "assets/NoGrok-128.png",
+    "32": "assets/NoGrok-128.png",
+    "48": "assets/NoGrok-128.png",
+    "128": "assets/NoGrok-128.png"
+  },
   "content_scripts": [
     {
       "matches": [
@@ -21,6 +27,12 @@
     }
   ],
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "assets/NoGrok-128.png",
+      "32": "assets/NoGrok-128.png",
+      "48": "assets/NoGrok-128.png",
+      "128": "assets/NoGrok-128.png"
+    }
   }
 }

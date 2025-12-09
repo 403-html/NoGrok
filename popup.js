@@ -11,6 +11,13 @@ function setStatus(text) {
   }
 }
 
+function setCurrentMode(text) {
+  const el = document.getElementById("current-mode");
+  if (el) {
+    el.textContent = text;
+  }
+}
+
 function getMode() {
   return new Promise((resolve) => {
     storageArea.get({ [MODE_KEY]: DEFAULT_MODE }, (result) => {
@@ -43,6 +50,7 @@ function bindInputs(currentMode) {
       const mode = event.target.value;
       await saveMode(mode);
       setStatus(`Handling set to "${mode}".`);
+      setCurrentMode(`Current mode: ${mode}`);
       setTimeout(() => setStatus(""), 1200);
     });
   });
@@ -63,7 +71,7 @@ async function init() {
   const mode = await getMode();
   let count = await getCount();
   bindInputs(mode);
-  setStatus(`Current mode: ${mode}`);
+  setCurrentMode(`Current mode: ${mode}`);
   renderCount(count);
 
   chrome.storage.onChanged.addListener((changes, areaName) => {
@@ -74,6 +82,9 @@ async function init() {
         total: changes[TOTAL_KEY]?.newValue ?? count.total
       };
       renderCount(count);
+    }
+    if (changes[MODE_KEY]?.newValue) {
+      setCurrentMode(`Current mode: ${changes[MODE_KEY].newValue}`);
     }
   });
 }

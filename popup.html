@@ -52,9 +52,15 @@
       }
       .status {
         margin-top: 8px;
-      font-size: 12px;
-      color: #334155;
-    }
+        font-size: 12px;
+        color: #334155;
+      }
+      .current-mode {
+        margin-top: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #0f172a;
+      }
       .counter {
         margin-top: 10px;
         padding: 8px 10px;
@@ -65,6 +71,18 @@
       }
       .counter p {
         margin: 4px 0;
+      }
+      .repo {
+        margin-top: 10px;
+        font-size: 12px;
+      }
+      .repo a {
+        color: #2563eb;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .repo a:hover {
+        text-decoration: underline;
       }
     </style>
   </head>
@@ -91,6 +109,10 @@
     <div class="counter">
       <p id="counter-current">Groks slain (this page): 0</p>
       <p id="counter-total">Groks slain (total): 0</p>
+    </div>
+    <div class="current-mode" id="current-mode"></div>
+    <div class="repo">
+      <a href="https://github.com/403-html/NoGrok" target="_blank" rel="noopener noreferrer">GitHub: 403-html/NoGrok</a>
     </div>
     <div class="status" id="status"></div>
     <script src="popup.js"></script>

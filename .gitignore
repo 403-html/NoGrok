@@ -1,0 +1,9 @@
+# macOS cruft
+.DS_Store
+
+# Build artifacts
+dist/
+
+# Editor settings
+.vscode/
+.idea/

@@ -17,27 +17,22 @@ const strategies = [
     name: "google",
     matches: (host) => host.includes("google."),
     getContainer(anchor) {
-      return (
-        anchor.closest("div.MjjYud, div.g, div[data-sokoban-container], div#search div[data-hveid]") ||
-        defaultContainer(anchor)
-      );
+      return anchor.closest("div.MjjYud, div.g, div[data-sokoban-container], div#search div[data-hveid]");
     }
   },
   {
     name: "bing",
     matches: (host) => host.includes("bing.com"),
     getContainer(anchor) {
-      return anchor.closest("li.b_algo, li.b_ans, div.b_algo, li.b_srt") || defaultContainer(anchor);
+      return anchor.closest("li.b_algo, li.b_ans, div.b_algo, li.b_srt");
     }
   },
   {
     name: "duckduckgo",
     matches: (host) => host.includes("duckduckgo.com"),
     getContainer(anchor) {
-      return (
-        anchor.closest(
-          "li[data-layout], article[data-testid='result'], article[data-nr], div.result, div.web-result"
-        ) || defaultContainer(anchor)
+      return anchor.closest(
+        "li[data-layout], article[data-testid='result'], article[data-nr], div.result, div.web-result"
       );
     }
   },
@@ -45,14 +40,14 @@ const strategies = [
     name: "brave",
     matches: (host) => host.includes("search.brave.com"),
     getContainer(anchor) {
-      return anchor.closest("div.snippet-card, div.fdb, div.card") || defaultContainer(anchor);
+      return anchor.closest("div.snippet-card, div.fdb, div.card");
     }
   },
   {
     name: "startpage",
     matches: (host) => host.includes("startpage.com"),
     getContainer(anchor) {
-      return anchor.closest("div.w-gl__result, section.w-gl") || defaultContainer(anchor);
+      return anchor.closest("div.w-gl__result, section.w-gl");
     }
   }
 ];
@@ -62,7 +57,20 @@ const strategy = strategies.find((s) => s.matches(location.hostname)) || {
   matches: () => true,
   getContainer: defaultContainer
 };
-const grokQuery = 'a[href*="grokipedia"]';
+const grokQuery = 'a[href*="grokipedia"], a[data-iwb-href*="grokipedia"]';
+const REDIRECT_PARAM_KEYS = [
+  "q",
+  "url",
+  "u",
+  "target",
+  "dest",
+  "redirect",
+  "rurl",
+  "l",
+  "lurl",
+  "href",
+  "to"
+];
 let stylesInjected = false;
 
 async function loadMode() {
@@ -121,19 +129,16 @@ function applyModeToAllFlagged() {
 
 function isGrokLink(anchor) {
   if (!anchor || anchor.tagName !== "A") return false;
-  const href = anchor.getAttribute("href") || "";
-  if (!href.includes("grokipedia")) return false;
-  try {
-    const url = new URL(href, location.href);
-    return url.hostname.toLowerCase().includes("grokipedia");
-  } catch (_) {
-    return false;
-  }
+  const targets = collectTargets(anchor);
+  return targets.some((url) => url.hostname && url.hostname.toLowerCase().includes("grokipedia"));
 }
 
 function getContainer(anchor) {
   if (!(anchor instanceof HTMLElement)) return anchor?.parentElement || null;
-  return strategy.getContainer(anchor) || defaultContainer(anchor);
+  const container = strategy.getContainer(anchor);
+  if (container) return container;
+  if (strategy.name !== "default") return null;
+  return defaultContainer(anchor);
 }
 
 function markResult(container) {
@@ -150,11 +155,14 @@ function scanForGrok(root) {
     return;
   }
 
-  const anchors = [];
+  const anchors = new Set();
   if (root instanceof HTMLElement && isGrokLink(root)) {
-    anchors.push(root);
+    anchors.add(root);
   }
-  root.querySelectorAll?.(grokQuery)?.forEach((anchor) => anchors.push(anchor));
+  root.querySelectorAll?.(grokQuery)?.forEach((anchor) => anchors.add(anchor));
+  root.querySelectorAll?.("a[data-iwb-href], a[data-href], a[href]")?.forEach((anchor) => {
+    anchors.add(anchor);
+  });
 
   anchors.forEach((anchor) => {
     if (!isGrokLink(anchor)) return;
@@ -274,4 +282,53 @@ function isIgnorableNode(node) {
   if (!(node instanceof HTMLElement)) return false;
   if (node.classList.contains(PILL_CLASS) || node.closest(`.${PILL_CLASS}`)) return true;
   return false;
+}
+
+function collectTargets(anchor) {
+  const urls = [];
+
+  function addUrl(value) {
+    if (!value || typeof value !== "string") return;
+    try {
+      const url = new URL(value, location.href);
+      urls.push(url);
+    } catch (_) {
+      // ignore
+    }
+  }
+
+  addUrl(anchor.getAttribute("data-iwb-href"));
+  addUrl(anchor.getAttribute("data-href"));
+  addUrl(anchor.getAttribute("href"));
+
+  try {
+    addUrl(anchor.href);
+  } catch (_) {
+    // ignore
+  }
+
+  // inspect redirect params for embedded URLs
+  urls.slice().forEach((url) => {
+    if (!(url instanceof URL)) return;
+    for (const [key, val] of url.searchParams.entries()) {
+      if (!REDIRECT_PARAM_KEYS.includes(key.toLowerCase())) continue;
+      addUrl(val);
+      const decoded = base64Decode(val);
+      addUrl(decoded);
+    }
+  });
+
+  return urls;
+}
+
+function base64Decode(value) {
+  if (!value || typeof value !== "string") return "";
+  const cleaned = value.replace(/[^0-9a-zA-Z+/=]/g, "");
+  if (cleaned.length < 12) return "";
+  const padded = cleaned + "=".repeat((4 - (cleaned.length % 4)) % 4);
+  try {
+    return atob(padded);
+  } catch {
+    return "";
+  }
 }

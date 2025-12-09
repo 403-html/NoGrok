@@ -3,6 +3,7 @@
   "name": "NoGrok",
   "description": "Remove Grokipedia results from major search engines for a cleaner, source-first search experience.",
   "version": "1.0.0",
+  "homepage_url": "https://github.com/403-html/NoGrok",
   "permissions": ["storage"],
   "icons": {
     "16": "assets/NoGrok-128.png",
@@ -33,6 +34,15 @@
       "32": "assets/NoGrok-128.png",
       "48": "assets/NoGrok-128.png",
       "128": "assets/NoGrok-128.png"
+    }
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "thetanadu@wp.pl",
+      "strict_min_version": "109.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
     }
   }
 }

@@ -20,11 +20,6 @@ Browser extension that removes Grokipedia results from major search engines for 
 
 - [x] Handling modes (hide/gray/keep) with pills and counter
 - [x] Popup UI for mode selection and counts
-- [ ] Test on DDG
-- [ ] Test on Google
-- [ ] Test on Bing
-- [ ] Test on Brave Search
-- [ ] Test on Startpage
 - [ ] Package with icons
 - [ ] Publishing to Chrome Web Store
 - [ ] Publishing to Edge Add-ons
@@ -38,8 +33,8 @@ Search engines tested so far:
 | Engine       | Status          | Notes               |
 | :----------- | :-------------: | :------------------ |
 | DuckDuckGo   | ✅ Works        | Verified manually   |
-| Google       | ⚠️ Needs check  | Pending manual test |
-| Bing         | ⚠️ Needs check  | Pending manual test |
+| Google       | ✅ Works        | Verified manually   |
+| Bing         | ✅ Works        | Verified manually   |
 | Brave Search | ⚠️ Needs check  | Pending manual test |
 | Startpage    | ⚠️ Needs check  | Pending manual test |
 

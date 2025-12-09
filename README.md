@@ -48,3 +48,10 @@ Browsers tested so far:
 | Safari / WebKit-based   | 🔴 Needs development | Pending                  |
 | Edge                    | 🔴 Needs development | Pending                  |
 | Opera                   | 🔴 Needs development | Pending                  |
+
+## Release (Chromium)
+
+1. Bump the version in `manifest.json`.
+2. Run `./pack.sh` to produce `dist/nogrok-<version>.zip`.
+3. Upload the zip to the Chrome Web Store or Edge Add-ons; Brave/Opera/Vivaldi can install from the Chrome Web Store.
+4. Include description/screenshots and justify host matches; submit for review.

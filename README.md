@@ -35,8 +35,8 @@ Search engines tested so far:
 | DuckDuckGo   | ✅ Works        | Verified manually   |
 | Google       | ✅ Works        | Verified manually   |
 | Bing         | ✅ Works        | Verified manually   |
-| Brave Search | ⚠️ Needs check  | Pending manual test |
-| Startpage    | ⚠️ Needs check  | Pending manual test |
+| Brave Search | ✅ Works        | Verified manually |
+| Startpage    | ✅ Works        | Pending manual test |
 
 Browsers tested so far:
 

@@ -40,14 +40,18 @@ const strategies = [
     name: "brave",
     matches: (host) => host.includes("search.brave.com"),
     getContainer(anchor) {
-      return anchor.closest("div.snippet-card, div.fdb, div.card");
+      return anchor.closest(
+        "div.snippet, div.snippet-card, div.result, div.result-wrapper, div.fdb, div.card"
+      );
     }
   },
   {
     name: "startpage",
     matches: (host) => host.includes("startpage.com"),
     getContainer(anchor) {
-      return anchor.closest("div.w-gl__result, section.w-gl");
+      return anchor.closest(
+        "div.w-gl__result, section.w-gl, div.result, li.result, div.w-gl__result__main, div.w-gl"
+      );
     }
   }
 ];

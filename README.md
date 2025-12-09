@@ -16,12 +16,39 @@ Browser extension that removes Grokipedia results from major search engines for 
 - Popup shows how many Grokipedia results were blocked on the current page and in total.
 - Uses a `MutationObserver` to keep filtering dynamically loaded results.
 
+## TODO
+
+- [x] Handling modes (hide/gray/keep) with pills and counter
+- [x] Popup UI for mode selection and counts
+- [ ] Test on DDG
+- [ ] Test on Google
+- [ ] Test on Bing
+- [ ] Test on Brave Search
+- [ ] Test on Startpage
+- [ ] Package with icons
+- [ ] Publishing to Chrome Web Store
+- [ ] Publishing to Edge Add-ons
+- [ ] Publishing to Firefox
+- [ ] Publishing to Safari variants
+
 ## Support status
 
-| Engine       | Status        | Notes                  |
-|--------------|---------------|------------------------|
-| DuckDuckGo   | ✅ Works      | Verified manually      |
-| Google       | ⚠️ Needs check | Pending manual test    |
-| Bing         | ⚠️ Needs check | Pending manual test    |
-| Brave Search | ⚠️ Needs check | Pending manual test    |
-| Startpage    | ⚠️ Needs check | Pending manual test    |
+Search engines tested so far:
+
+| Engine       | Status          | Notes               |
+| :----------- | :-------------: | :------------------ |
+| DuckDuckGo   | ✅ Works        | Verified manually   |
+| Google       | ⚠️ Needs check  | Pending manual test |
+| Bing         | ⚠️ Needs check  | Pending manual test |
+| Brave Search | ⚠️ Needs check  | Pending manual test |
+| Startpage    | ⚠️ Needs check  | Pending manual test |
+
+Browsers tested so far:
+
+| Browser                 | Status               | Notes                    |
+| :---------------------- | :------------------: | :----------------------- |
+| Chrome / Chromium-based | ✅ Works             | Verified manually        |
+| Firefox                 | 🔴 Needs development | Pending                  |
+| Safari / WebKit-based   | 🔴 Needs development | Pending                  |
+| Edge                    | 🔴 Needs development | Pending                  |
+| Opera                   | 🔴 Needs development | Pending                  |

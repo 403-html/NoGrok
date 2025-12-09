@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NoGrok</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      }
+      body {
+        margin: 12px;
+      min-width: 220px;
+      color: #0f172a;
+    }
+    h1 {
+      font-size: 16px;
+        margin: 0 0 10px;
+      }
+      fieldset {
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        padding: 10px;
+      }
+      legend {
+        padding: 0 6px;
+        font-weight: 600;
+        color: #0f172a;
+      }
+      label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin: 6px 0;
+        cursor: pointer;
+      }
+      input[type="radio"] {
+        accent-color: #2563eb;
+      }
+      .status {
+        margin-top: 8px;
+      font-size: 12px;
+      color: #334155;
+    }
+      .counter {
+        margin-top: 10px;
+        padding: 8px 10px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        background: #f8fafc;
+        font-weight: 600;
+      }
+      .counter p {
+        margin: 4px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>NoGrok</h1>
+    <fieldset>
+      <legend>Handling</legend>
+      <label>
+        <input type="radio" name="handling" value="hide" />
+        Hide Grokipedia results
+      </label>
+      <label>
+        <input type="radio" name="handling" value="gray" />
+        Gray them out
+      </label>
+      <label>
+        <input type="radio" name="handling" value="keep" />
+        Keep visible
+      </label>
+    </fieldset>
+    <div class="counter">
+      <p id="counter-current">Groks slain (this page): 0</p>
+      <p id="counter-total">Groks slain (total): 0</p>
+    </div>
+    <div class="status" id="status"></div>
+    <script src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "NoGrok",
+  "description": "Remove Grokipedia results from major search engines for a cleaner, source-first search experience.",
+  "version": "1.0.0",
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.google.com/*",
+        "*://*.bing.com/*",
+        "*://duckduckgo.com/*",
+        "*://*.duckduckgo.com/*",
+        "*://search.brave.com/*",
+        "*://*.startpage.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

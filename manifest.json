@@ -12,7 +12,9 @@
         "*://duckduckgo.com/*",
         "*://*.duckduckgo.com/*",
         "*://search.brave.com/*",
-        "*://*.startpage.com/*"
+        "*://*.startpage.com/*",
+        "*://*.qwant.com/*",
+        "*://qwant.com/*"
       ],
       "js": ["content.js"],
       "run_at": "document_idle"

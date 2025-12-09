@@ -53,6 +53,24 @@ const strategies = [
         "div.w-gl__result, section.w-gl, div.result, li.result, div.w-gl__result__main, div.w-gl"
       );
     }
+  },
+  {
+    name: "qwant",
+    matches: (host) => host.includes("qwant.com"),
+    getContainer(anchor) {
+      const innerSelectors = [
+        "div[data-testid='webResult']",
+        "div._0IJFK[data-testid='webResult']",
+        "div[data-testid='SERVariant-A']"
+      ];
+      let match = null;
+      for (const sel of innerSelectors) {
+        match = anchor.closest(sel);
+        if (match) break;
+      }
+      const outer = (match || anchor).closest("div.iwb-detected");
+      return outer || match;
+    }
   }
 ];
 
